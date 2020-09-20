@@ -2,6 +2,8 @@
 #
 # Author: Diogo Alexsander Cavilha <diogocavilha@gmail.com>
 # Date:   12.05.2018
+#
+# Updates manager.
 
 check_for_update() {
     if __fancygit_must_check_for_update

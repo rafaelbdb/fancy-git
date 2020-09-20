@@ -5,6 +5,10 @@
 #
 # Changes de prompt by loading the style configured in ~/.fancygit/app_config file.
 
+. ~/.fancy-git/aliases
+. ~/.fancy-git/commands.sh
+. ~/.fancy-git/fancygit-completion
+
 function fancygit_prompt_changer() {
     local style
 
