@@ -3,120 +3,105 @@
 # Author: Diogo Alexsander Cavilha <diogocavilha@gmail.com>
 # Date:   12.02.2018
 
-. ~/.fancy-git/aliases
-. ~/.fancy-git/fancygit-completion
-. ~/.fancy-git/commands.sh
-
 fancygit_prompt_builder() {
-    . ~/.fancy-git/config.sh
+    . ~/.fancy-git/prompt_styles/base.sh
     . ~/.fancy-git/modules/update-manager.sh
 
     check_for_update
 
-    local blue="\\033[95;38;5;45m"
-    local bold="\\[\\e[1m\\]"
-    local bold_none="\\[\\e[0m\\]"
-    local light_green="\\[\\e[92m\\]"
-    local light_yellow="\\[\\e[93m\\]"
-    local none="\\[\\e[39m\\]"
-    local dark_orange="\\033[95;38;5;166m"
-    local orange="\\033[95;38;5;214m"
+    local prompt_user
+    local prompt_symbol
+    local prompt_symbol_double_line
+    local user
+    local at
+    local host
 
-    # Prompt style
-    user="${orange}${bg_dark_gray_01}${bold}"
-    at="${white}${bg_dark_gray_01}${bold}"
-    host="${light_yellow}${bg_dark_gray_01}${bold}"
-    user_at_host_end="${bold_none}${bg_none}"
-    user_at_host_end_git="${bold_none}${bg_none}"
-    user_symbol="${bg_dark_gray}${bold}${white}"
-    user_symbol_end="${none}${bold_none}${bg_none}${s_darkgray}"
-    path="${bg_dark_gray}${white}${bold}"
-    path_git="${bg_dark_gray_05}${dark_orange}  ${is_git_repo} ${bold}"
-    path_end="${none}${bold_none}"
-    branch="${s_darkgray05_bgdarkgray04}${bg_dark_gray_04}${white}${bold}"
-    branch_end="${bg_none}${none}${bold_none}${s_darkgray04}"
-    local venv=""
-    local path_sign=""
-    local user_at_host=""
+    # Main colors and backgrounds of the theme
+    local dark_gray
+    local dark_gray_01
+    local orange
+    local bg_dark_gray
+    local bg_dark_gray_01
+    
+    # separators
+    local icon_separator_darkgray_bgdarkgray01
+    local icon_separator_darkgray01_bgdarkgray
+    local icon_separator_darkgray01_bgwhite
+    local icon_separator_darkgray01_bglightyellow
+    local icon_separator_darkgray01_bglightgreen
+    local icon_separator_darkgray01
+    
+    # Prompt style tags
+    local user_at_host_start
+    local user_at_host_end
+    local user_symbol_start
+    local user_symbol_end
+    local path_start
+    local path_git_start
+    local path_end
+    local branch_start
+    local branch_end
 
-    # Building prompt
-    if [ "$branch_status" != "" ]
-    then
-        branch="${s_darkgray05_bglightyellow}${bg_light_yellow}${black}${bold}"
-        branch_end="${bg_none}${bold_none}${s_lightyellow}"
+    # Main colors and backgrounds of the theme
+    dark_gray="\\[\\e[90m\\]"
+    dark_gray_01="\\[\\e[38;5;234m\\]"
+    orange="\\033[95;38;5;214m"
+    bg_dark_gray="\\[\\e[100m\\]"
+    bg_dark_gray_01="\\[\\e[48;5;234m\\]"
+
+    # separators
+    icon_separator_darkgray_bgdarkgray01="${dark_gray}${bg_dark_gray_01}${fancygit_icon_separator}${fancygit_bg_color_reset}${fancygit_color_reset}"
+    icon_separator_darkgray01_bgdarkgray="${dark_gray_01}${bg_dark_gray}${fancygit_icon_separator}${fancygit_bg_color_reset}${fancygit_color_reset}"
+    icon_separator_darkgray01_bgwhite="${dark_gray_01}${fancygit_bg_color_white}${fancygit_icon_separator}${fancygit_bg_color_reset}${fancygit_color_reset}${fancygit_bg_color_reset}"
+    icon_separator_darkgray01_bglightyellow="${dark_gray_01}${fancygit_bg_color_light_yellow}${fancygit_icon_separator}${fancygit_bg_color_reset}${fancygit_color_reset}${fancygit_bg_color_reset}"
+    icon_separator_darkgray01_bglightgreen="${dark_gray_01}${fancygit_bg_color_light_green}${fancygit_icon_separator}${fancygit_bg_color_reset}${fancygit_color_reset}${fancygit_bg_color_reset}"
+    icon_separator_darkgray01="${dark_gray_01}${fancygit_icon_separator}${fancygit_color_reset}"
+    
+    # Prompt style tags
+    user_at_host_start="${fancygit_color_white}${bg_dark_gray_01}${fancygit_bold}"
+    user_at_host_end="${fancygit_bold_reset}${fancygit_bg_color_reset}${icon_separator_darkgray01_bgdarkgray}"
+    user_symbol_start="${bg_dark_gray}${fancygit_bold}${fancygit_color_white}"
+    user_symbol_end="${fancygit_color_reset}${fancygit_bold_reset}${fancygit_bg_color_reset}${icon_separator_darkgray_bgdarkgray01}"
+    path_start="${bg_dark_gray_01}${fancygit_color_light_blue}${fancygit_bold}"
+    path_end="${fancygit_color_reset}${fancygit_bold_reset}"
+    path_git_start="${bg_dark_gray_01}${fancygit_color_white}  ${fancygit_icon_git_repo} ${fancygit_bold}"
+    
+    branch_start="${icon_separator_darkgray01_bgwhite}${fancygit_bg_color_white}${fancygit_color_black}${fancygit_bold}"
+    branch_end="${fancygit_bg_color_reset}${fancygit_color_reset}${fancygit_bold_reset}${fancygit_icon_separator_white}"
+
+    user="${orange}${bg_dark_gray_01}${fancygit_bold}"
+    at="${fancygit_color_white}${bg_dark_gray_01}${fancygit_bold}"
+    host="${fancygit_color_light_yellow}${bg_dark_gray_01}${fancygit_bold}"
+
+    prompt_user=$(fancygit_setting_show_hide "show-user-at-machine" "${user}\\u${at}@${host}\\h" "$user_at_host_start" "$user_at_host_end")
+    prompt_symbol="${user_symbol_start} \$ ${user_symbol_end}"
+
+    prompt_symbol_double_line="\n${fancygit_color_light_green}${fancygit_icon_double_line}${fancygit_color_reset}"
+
+    # Set branch background to yellow in case there are changes
+    if ! [ -z "$fancygit_git_branch_status" ]; then
+        branch_start="${icon_separator_darkgray01_bglightyellow}${fancygit_bg_color_light_yellow}${fancygit_color_black}${fancygit_bold}"
+        branch_end="${fancygit_bg_color_reset}${fancygit_bold_reset}${fancygit_icon_separator_lightyellow}"
     fi
 
-    if [ "$staged_files" = "" ]
-    then
-        has_added_files=""
+    # Set branch background to green in case there are staged files
+    if ! [ -z "$fancygit_git_staged_files" ]; then
+        branch_start="${icon_separator_darkgray01_bglightgreen}${fancygit_bg_color_light_green}${fancygit_color_black}${fancygit_bold}"
+        branch_end="${fancygit_bg_color_reset}${fancygit_bold_reset}${fancygit_icon_separator_green}"
     fi
 
-    if [ "$staged_files" != "" ]
-    then
-        branch="${s_darkgray05_bglightgreen}${bg_light_green}${black}${bold}"
-        branch_end="${bg_none}${bold_none}${s_green}"
-    fi
+    prompt_path="${path_start}${fancygit_icon_virtualvenv} $fancygit_prompt_path ${path_end}${icon_separator_darkgray01}"
 
-    if [ "$git_stash" = "" ]
-    then
-        has_git_stash=""
-    fi
+    PS1="${prompt_user}${prompt_symbol}${prompt_path}${prompt_symbol_double_line} "
+    PS2="${fancygit_color_light_green}${fancygit_icon_PS2}${fancygit_color_reset} "
 
-    if [ "$git_untracked_files" = "" ]
-    then
-        has_untracked_files=""
-    fi
-
-    if [ "$git_changed_files" = "" ]
-    then
-        has_changed_files=""
-    fi
-
-    has_unpushed_commits="$has_unpushed_commits+$git_number_unpushed_commits"
-    if [ "$git_has_unpushed_commits" = "" ]
-    then
-        has_unpushed_commits=""
-    fi
-
-    if fg_show_user_at_machine
-    then
-        user_at_host="${user}\\u${at}@${host}\\h "
-        user_at_host_end="${bold_none}${bg_none}${s_darkgray01_bgdarkgray}"
-        user_at_host_end_git="${bold_none}${bg_none}${s_darkgray01_bgdarkgray05}"
-    fi
-
-    if [ "$branch_name" != "" ]
-    then
-	   prompt_user="${user_at_host}${user_at_host_end_git}"
-    else
-	   prompt_user="${user_at_host}${user_at_host_end}"
-    fi
-
-    prompt_symbol="\n${user_symbol}\$${user_symbol_end}"
-
-    if ! [ -z ${VIRTUAL_ENV} ]
-    then
-        venv="$working_on_venv"
-    fi
-
-    path_sign="\\W"
-    if fg_show_full_path
-    then
-        path_sign="\\w"
-    fi
-
-    prompt_path="${path}${bold}${blue}${venv} $path_sign ${path_end}${s_darkgray}"
-
-    if [ "$branch_name" != "" ]
-    then
-        branch_icon=$(fg_get_branch_icon)
-        prompt_path="${path_git}${venv}${has_git_stash}${has_untracked_files}${has_changed_files}${has_added_files}${has_unpushed_commits} $path_sign ${path_end}"
-        prompt_branch="${branch} ${branch_icon} ${branch_name} ${branch_end}"
-        PS1="${prompt_user}${prompt_path}${prompt_branch}${prompt_symbol} "
+    if ! [ -z "$fancygit_git_branch_name" ]; then
+        path_git_start="${bg_dark_gray_01}${orange}  ${fancygit_icon_git_repo} ${fancygit_bold}"
+        prompt_path="${path_git_start}${fancygit_repo_status_section} $fancygit_prompt_path ${path_end}"
+        prompt_branch="${branch_start} ${fancygit_icon_branch} ${fancygit_git_branch_name} ${branch_end}"
+        PS1="${prompt_user}${prompt_symbol}${prompt_path}${prompt_branch}${prompt_symbol_double_line} "
         return
     fi
-
-    PS1="${prompt_user}${prompt_path}${prompt_symbol} "
 }
 
 PROMPT_COMMAND="fancygit_prompt_builder"
