@@ -58,7 +58,7 @@ fancygit_prompt_builder() {
     user_symbol_end="${fancygit_color_reset}${fancygit_bold_reset}${fancygit_bg_color_reset}${icon_separator_darkgray_bgdarkgray01}"
     path_start="${bg_dark_gray_01}${fancygit_color_white}${fancygit_bold}"
     path_end="${fancygit_color_reset}${fancygit_bold_reset}"
-    path_git_start="${bg_dark_gray_01}${fancygit_color_white}  ${fancygit_icon_git_repo} ${fancygit_bold}"
+    path_git_start="${bg_dark_gray_01}${fancygit_color_white} ${fancygit_icon_git_repo} ${fancygit_bold}"
     
     branch_start="${icon_separator_darkgray01_bgwhite}${fancygit_bg_color_white}${fancygit_color_black}${fancygit_bold}"
     branch_end="${fancygit_bg_color_reset}${fancygit_color_reset}${fancygit_bold_reset}${fancygit_icon_separator_white}"

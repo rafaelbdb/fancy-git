@@ -64,7 +64,7 @@ fancygit_prompt_builder() {
     user_symbol_end="${fancygit_color_reset}${fancygit_bold_reset}${fancygit_bg_color_reset}${icon_separator_darkgray_bgdarkgray01}"
     path_start="${bg_dark_gray_01}${fancygit_color_light_blue}${fancygit_bold}"
     path_end="${fancygit_color_reset}${fancygit_bold_reset}"
-    path_git_start="${bg_dark_gray_01}${fancygit_color_white}  ${fancygit_icon_git_repo} ${fancygit_bold}"
+    path_git_start="${bg_dark_gray_01}${fancygit_color_white} ${fancygit_icon_git_repo} ${fancygit_bold}"
     
     branch_start="${icon_separator_darkgray01_bgwhite}${fancygit_bg_color_white}${fancygit_color_black}${fancygit_bold}"
     branch_end="${fancygit_bg_color_reset}${fancygit_color_reset}${fancygit_bold_reset}${fancygit_icon_separator_white}"
@@ -96,7 +96,7 @@ fancygit_prompt_builder() {
     PS2="${fancygit_color_light_green}${fancygit_icon_PS2}${fancygit_color_reset} "
 
     if ! [ -z "$fancygit_git_branch_name" ]; then
-        path_git_start="${bg_dark_gray_01}${orange}  ${fancygit_icon_git_repo} ${fancygit_bold}"
+        path_git_start="${bg_dark_gray_01}${orange} ${fancygit_icon_git_repo} ${fancygit_bold}"
         prompt_path="${path_git_start}${fancygit_repo_status_section} $fancygit_prompt_path ${path_end}"
         prompt_branch="${branch_start} ${fancygit_icon_branch} ${fancygit_git_branch_name} ${branch_end}"
         PS1="${prompt_user}${prompt_symbol}${prompt_path}${prompt_branch}${prompt_symbol_double_line} "
