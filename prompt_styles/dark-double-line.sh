@@ -67,7 +67,7 @@ fancygit_prompt_builder() {
     prompt_user=$(fancygit_setting_show_hide "show-user-at-machine" "\\u@\\h" "$user_at_host_start" "$user_at_host_end")
     prompt_symbol="${user_symbol_start} \$ ${user_symbol_end}"
 
-    prompt_symbol_double_line="\n${fancygit_color_light_green}${fancygit_icon_double_line}${fancygit_color_reset}"
+    prompt_symbol_double_line="\n${fancygit_icon_double_line}"
 
     # Set branch background to yellow in case there are changes
     if ! [ -z "$fancygit_git_branch_status" ]; then
@@ -84,7 +84,7 @@ fancygit_prompt_builder() {
     prompt_path="${path_start}${fancygit_icon_virtualvenv} $fancygit_prompt_path ${path_end}${icon_separator_darkgray01}"
 
     PS1="${prompt_user}${prompt_symbol}${prompt_path}${prompt_symbol_double_line} "
-    PS2="${fancygit_color_light_green}${fancygit_icon_PS2}${fancygit_color_reset} "
+    PS2="${fancygit_icon_PS2} "
 
     if ! [ -z "$fancygit_git_branch_name" ]; then
         prompt_path="${path_git_start}${fancygit_repo_status_section} $fancygit_prompt_path ${path_end}"

@@ -3,30 +3,10 @@
 # Author: Diogo Alexsander Cavilha <diogocavilha@gmail.com>
 # Date:   06.06.2018
 
-. ~/.fancy-git/aliases
-. ~/.fancy-git/fancygit-completion
-. ~/.fancy-git/commands.sh
-
-fg_branch_name() {
-    local branch_name=$(git rev-parse --abbrev-ref HEAD 2> /dev/null)
-    local branch_status=$(fg_branch_status)
-
-    if [ "$branch_status" != "" ]; then
-        branch_name="$branch_name |$branch_status"
-    fi
-
-    if [ "$branch_name" != "" ]; then
-        echo " ($branch_name)"
-        return
-    fi
-
-    echo ""
-}
-
 fancygit_prompt_builder() {
-    . ~/.fancy-git/config.sh
+    . ~/.fancy-git/prompt_styles/base-simple.sh
     . ~/.fancy-git/modules/update-manager.sh
-    
+
     check_for_update
 
     local user
@@ -35,27 +15,25 @@ fancygit_prompt_builder() {
     local where
     local venv=""
     local user_at_host=""
+    local ps1
 
-    user="${light_green}\u${none}"
-    at="${none}@${none}"
-    host="${light_green}\h${none}"
-    where="${blue}\w${none}"
+    user="${fancygit_bold}${fancygit_color_light_green}\u${fancygit_color_reset}"
+    at="${fancygit_color_reset}@${fancygit_color_reset}"
+    host="${fancygit_color_light_green}\h${fancygit_color_reset}"
+    where="${fancygit_color_blue}${fancygit_prompt_path}${fancygit_color_reset}${fancygit_bold_reset}"
 
-    if ! fg_show_full_path
-    then
-        where="${blue}\W${none}"
-    fi
+    user_at_host="$user$at$host:"
 
     if ! [ -z ${VIRTUAL_ENV} ]; then
         venv="(`basename \"$VIRTUAL_ENV\"`) "
     fi
 
-    if fg_show_user_at_machine
-    then
-        user_at_host="$user$at$host:"
-    fi
+    prompt_user=$(fancygit_setting_show_hide "show-user-at-machine" "$user_at_host" "$user_at_host_start" "$user_at_host_end")
+    PS1="${fancygit_bold}${venv}${prompt_user}$where\$${fancygit_bold_none} "
 
-    PS1="${bold}${venv}${user_at_host}$where\$$(fg_branch_name)${bold_none} "
+    if ! [ -z "$fancygit_git_branch_name" ]; then
+        PS1="${fancygit_bold}${venv}${prompt_user}$where\$${fancygit_bold}${fancygit_repo_status_section}${fancygit_bold_reset}(${fancygit_git_branch_icon}${fancygit_color_orange}${fancygit_git_branch_name}${fancygit_color_reset})${fancygit_bold_reset} "
+    fi
 }
 
 PROMPT_COMMAND="fancygit_prompt_builder"
