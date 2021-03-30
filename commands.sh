@@ -214,6 +214,7 @@ case "$1" in
     "dark") fg_update_app_config "style" "dark";;
     "dark-double-line") fg_update_app_config "style" "dark-double-line";;
     "dark-col-double-line") fg_update_app_config "style" "dark-col-double-line";;
+    "dark-high-contrast") fg_update_app_config "style" "dark-high-contrast";;
     "light") fg_update_app_config "style" "light";;
     "light-double-line") fg_update_app_config "style" "light-double-line";;
     "configure-fonts") fg_install_fonts;;

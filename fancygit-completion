@@ -20,6 +20,7 @@ _fancygit() {
         dark \
         dark-double-line \
         dark-col-double-line \
+        dark-high-contrast \
         light \
         light-double-line \
         --colors \
