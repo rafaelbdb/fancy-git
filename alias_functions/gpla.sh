@@ -1,9 +1,9 @@
 #!/bin/bash
 #
-# Author: Diogo Alexsander Cavilha <diogocavilha@gmail.com>
-# Date:   04.01.2016
+# Author: Rafael Borges Dias Baptista <r.borjovsky@gmail.com>
+# Date:   30.03.2021
 #
-# git pull
+# git pull --all
 
 . ~/.fancy-git/random_messages.sh
 
