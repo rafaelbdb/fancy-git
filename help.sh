@@ -38,7 +38,7 @@ echo " Fancy Git v$FANCYGIT_VERSION - $fg_current_year by Diogo Alexsander Cavil
  fancygit dark                    Change prompt to the dark style.
  fancygit dark-double-line        Change prompt to the dark style in double line.
  fancygit dark-col-double-line    Change prompt to the dark (colored) style in double line.
- fancygit dark-high-contrast      Change prompt to the dark (high-contrast) style in double line.
+ fancygit retro-80s-cga           Change prompt to the retro (based on 80's CGA graphics) style in double line.
  fancygit light                   Change prompt to the light style.
  fancygit light-double-line       Change prompt to the light style in double line.
 

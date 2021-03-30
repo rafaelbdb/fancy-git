@@ -111,8 +111,8 @@ Here you have a list of available styles and their corresponding command to appl
 `fancygit dark-col-double-line`
 ![Dark Col Double Line](https://github.com/diogocavilha/fancy-git/blob/master/images/styles/dark-col-double-line.png)
 
-`fancygit dark-high-contrast`
-![Dark High Contrast](https://github.com/diogocavilha/fancy-git/blob/master/images/styles/dark-high-contrast.png)
+`fancygit retro-80s-cga`
+![Dark High Contrast](https://github.com/diogocavilha/fancy-git/blob/master/images/styles/retro-80s-cga.png)
 
 `fancygit light`
 ![Light](https://github.com/diogocavilha/fancy-git/blob/master/images/styles/light.png)
@@ -143,7 +143,7 @@ Here you have a list of available styles and their corresponding command to appl
 | fancygit dark                              | Change prompt to the dark style.
 | fancygit dark-double-line                  | Change prompt to the dark style in double line.
 | fancygit dark-col-double-line              | Change prompt to the dark (colored) style in double line.
-| fancygit dark-high-contrast                | Change prompt to the dark (high-contrast) style in double line.
+| fancygit retro-80s-cga                     | Change prompt to the retro (based on 80's CGA graphics) style in double line.
 | fancygit light                             | Change prompt to the light style.
 | fancygit light-double-line                 | Change prompt to the light style in double line.
 

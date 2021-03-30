@@ -20,7 +20,7 @@ _fancygit() {
         dark \
         dark-double-line \
         dark-col-double-line \
-        dark-high-contrast \
+        retro-80s-cga \
         light \
         light-double-line \
         --colors \
