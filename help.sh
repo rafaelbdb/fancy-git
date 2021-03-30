@@ -74,13 +74,14 @@ echo " Fancy Git v$FANCYGIT_VERSION - $fg_current_year by Diogo Alexsander Cavil
  gaa                        Add all files in order to commit.
  gd                         Clear screen and git diff.
  gcm                        Start committing.
- gcmm \"message\"             Start committing with a message.
- gpl                        Git pull.
- gps                        Git push.
- gplo <branch-name>         Git pull from <branch-name> to current local branch.
- gpso <branch-name>         Git push from current local branch to <branch-name>.
- gplob                      Git pull from remote current branch to local current branch.
- gpsob                      Git push from local current branch to remote current branch.
+ gcmm \"message\"           Start committing with a message.
+ gpl                        Pull current local branch from remote.
+ gps                        Push current local branch to remote.
+ gpla                       Pull all branches from remote.
+ gplo <branch-name>         Pull from <branch-name> to current local branch.
+ gpso <branch-name>         Push from current local branch to <branch-name>.
+ gplob                      Pull from remote current branch to local current branch.
+ gpsob                      Push from local current branch to remote current branch.
  gck <file> [<other_file>]  Rollback file changes.
  gckb <branch-name>         Switch to a branch.
  gckbt <branch-name>        Switch to a branch with --track option.
@@ -98,11 +99,11 @@ echo " Fancy Git v$FANCYGIT_VERSION - $fg_current_year by Diogo Alexsander Cavil
  glp                        Show pretty git log.
  gst                        Create new stash with default message.
  gstl                       List all stashes.
- gstm \"message\"             Create new stash with custom message.
+ gstm \"message\"           Create new stash with custom message.
  gstw <stash_id>            Show stash diffs by its numeric ID.
  gsta <stash_id>            Apply stash by its numeric ID.
  gstd <stash_id>            Drop a specific stash by its numeric ID.
- gg \"message\"               Add all changes, then commit and push them.
+ gg \"message\"             Add all changes, then commit and push them.
  gu <file> [<other_file>]   Remove files from staging area.
  pve                        Show the current Python virtual environment name.
 
